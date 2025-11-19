@@ -1,0 +1,26 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Exhibition {
+  id                    String   @id @default(cuid())
+  companyName           String
+  companyDescription    String   @db.Text
+  companyPosterUrl      String
+  companyAbout          String   @db.Text
+  productName           String
+  productDescription    String   @db.Text
+  productAbout          String   @db.Text
+  productImages         String[] // Array of image URLs
+  productVideoUrl       String?  // Optional video URL or uploaded video
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("exhibitions")
+}
